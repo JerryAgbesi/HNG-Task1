@@ -1,16 +1,21 @@
 from flask import Flask,jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/",methods=["GET"])
 def home():
-    return jsonify(
+
+    response = jsonify(
         {
          "slackUsername": "jerryeagbesi", 
          "backend": True, 
          "age": 21, 
          "bio": "Hello I'm Jerry, I'm currently learning to become a world-class backend engineer 🤌"
-    }),200
+    })
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response,200
 
 
 
